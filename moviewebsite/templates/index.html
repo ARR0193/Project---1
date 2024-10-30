@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A brief description of your webpage">
+    <meta name="author" content="Your Name">
+    <title>Book My Private Show</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="icon" href="images/movieicon.jpg" type="image/icon-image">
+</head>
+
+<body>
+    <h1 style="color: red;">Welcome to Book My Private Show</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a href="#" class="navbar-brand">Book My Private Show</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Account</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container movie-details">
+        <!-- Existing movie details here -->
+        <div class="row">
+            <div class="col-md-6 left-box">
+                <h1 class="movie-title">KALKI</h1>
+                <img src="{{ url_for('static', filename='images/kalki.jpeg') }}" alt="Description of image">
+                <p class="para">Experience the cinematic spectacle of "Kalki: 2898 AD", where myth and technology
+                    collide in a riveting tale of courage, redemption, and the ultimate quest for survival. Book your
+                    tickets now and join the revolution against tyranny.</p>
+                <br>
+                <a href="https://youtu.be/BfCIPsEGAS8?si=UB-5Jv5CBxncZA4O" target="_blank">Watch trailer</a>
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">Book now</a>
+                <a href="#">Write review</a>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6 left-box">
+                <h1 class="movie-title">Inside Out 2</h1>
+                <img src="{{ url_for('static', filename='images/inside out 2.jpeg') }}" alt="Description of image">
+                <p class="para">Get ready to journey back inside Riley's mind in 'Inside Out 2,' where new emotions and
+                    teenage challenges await. Pixar's sequel promises another heartfelt adventure into the world of
+                    emotions, filled with humor, heart, and stunning animation.</p>
+                <br>
+                <a href="https://youtu.be/LEjhY15eCx0?si=Oa2vLHJS9LvzRkAx" target="_blank">Watch trailer</a>
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">Book now</a>
+                <a href="#">Write review</a>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6 left-box">
+                <h1 class="movie-title">Jawan</h1>
+                <img src="{{ url_for('static', filename = 'images/jawan.jpeg') }}" alt="Description of image">
+                <p class="para">Explore the heroic saga of 'Jawan,' starring Shah Rukh Khan in a compelling role. Follow
+                    his character's journey through valor and challenges, blending action, emotion, and Shah Rukh Khan's
+                    charismatic performance for an unforgettable cinematic experience.</p>
+                <br>
+                <a href="https://youtu.be/MWOlnZSnXJo?si=PMIJgz-DOWZDaVW0" target="_blank">Watch trailer</a>
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">Book now</a>
+                <a href="#">Write review</a>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+
+        <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bookingModalLabel">Book Your Show</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="bookingForm" action="/api/book" method="POST">
+                            <div class="mb-3">
+                                <label for="movieTitle" class="form-label">Movie Title</label>
+                                <input type="text" class="form-control" id="movieTitle" name="movieTitle" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="seats" class="form-label">Number of Seats</label>
+                                <input type="number" class="form-control" id="seats" name="seats" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Book Now</button>
+                        </form>
+                        <script>
+
+                            document.querySelectorAll('.btn-primary[data-bs-toggle="modal"]').forEach(button => {
+                                button.addEventListener('click', () => {
+                                    const movieTitle = button.parentNode.querySelector('.movie-title').textContent.trim();
+                                    document.getElementById('movieTitle').value = movieTitle;
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script src="node.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+    $('#bookingForm').on('submit', function (event) {
+        event.preventDefault();
+
+        var formData = $(this).serialize();
+
+        $.ajax({
+            url: '/api/book',
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if (data.success) {
+                    alert('Booking successful!');
+                    var bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+                    bookingModal.hide();
+                } else {
+                    alert('Booking failed. Please try again.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+                alert('Booking failed. Please try again.');
+            }
+        });
+    });
+});
+
+    </script>
+
+</body>
+
+</html>
